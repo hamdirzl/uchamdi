@@ -60,29 +60,12 @@ label { display: block; margin-bottom: 4px; font-weight: 500; font-size: 0.9em; 
 #scores ul { list-style-type: none; padding: 0; } #scores li { padding: 7px 0; font-size: 1em; border-bottom: 1px solid var(--border-color); }
 #scores li:last-child { border-bottom: none; }
 
-/* --- Custom Word Section (PERUBAHAN GAYA INPUT) --- */
-.custom-word-input-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-bottom: 10px;
-}
-.input-pair {
-    display: flex;
-    flex-direction: column;
-}
-.input-pair label {
-    margin-bottom: 3px;
-}
-.input-pair input[type="text"] {
-    margin-top: 0;
-    margin-bottom: 5px;
-}
-.add-pair-button {
-    grid-column: 1 / -1;
-    margin-top: 5px;
-    width: 100%;
-}
+/* --- Custom Word Section --- */
+.custom-word-input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 10px; }
+.input-pair { display: flex; flex-direction: column; }
+.input-pair label { margin-bottom: 3px; }
+.input-pair input[type="text"] { margin-top: 0; margin-bottom: 5px; }
+.add-pair-button { grid-column: 1 / -1; margin-top: 5px; width: 100%; }
 #customWordList { list-style-type: none; padding: 0; max-height: 140px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 6px; padding: 10px; background-color: #fff; margin-top:15px;}
 #customWordList li { padding: 7px 10px; font-size: 0.95em; border-bottom: 1px dotted var(--border-color); display: flex; justify-content: space-between; align-items: center; }
 #customWordList li:last-child { border-bottom: none; }
@@ -94,18 +77,18 @@ footer { text-align: center; margin-top: 35px; padding-top: 20px; border-top: 1p
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(76, 58, 81, 0.7); display: flex; justify-content: center; align-items: center; z-index: 1000; padding: 15px; }
 .modal-content { background-color: var(--background-color); padding: 25px 30px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); text-align: center; max-width: 500px; width: 90%; }
 #cardPopup.modal-content { padding: 0; background-color: transparent; box-shadow: none; max-width: none; width: auto; }
-.card-container { width: 280px; height: 420px; perspective: 1200px; }
-.card-flipper { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
-.card-flipper.is-flipped { transform: rotateY(180deg); }
-.card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 16px; box-shadow: 0 6px 20px rgba(76, 58, 81, 0.3); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; text-align: center; }
+.card-container { width: 280px; height: 420px; perspective: 1200px; } /* Default perspective */
+.card-flipper { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); } /* Default transform-style */
+.card-flipper.is-flipped { transform: rotateY(180deg); } /* Default flip */
+.card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 16px; box-shadow: 0 6px 20px rgba(76, 58, 81, 0.3); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; text-align: center; } /* Default backface-visibility */
 .card-back { background-color: var(--card-back-color); color: var(--card-back-text-color); font-family: 'Pacifico', cursive; }
 .card-back.no-image { background-color: var(--card-back-color); }
 .card-back-image { max-width: 60%; max-height: 40%; object-fit: contain; margin-bottom: 15px; }
 #cardBackTitle { font-size: 1.6em; display: block; margin-bottom: 20px; color: var(--card-back-text-color); }
 .card-back-button { background-color: var(--secondary-color); color: var(--text-color); padding: 10px 20px; border: none; font-weight: 600; margin-top: 10px; flex-shrink: 0; }
 .card-back-button:hover { background-color: #bca0ef; }
-.card-front { background-color: var(--accent-color); color: var(--text-color); transform: rotateY(180deg); font-family: 'Poppins', sans-serif; justify-content: space-around; }
-.card-front p { font-size: 1.2em; line-height: 1.6; text-align: center; font-weight: 400; margin: 10px 0; overflow-y: auto; max-height: calc(100% - 80px); }
+.card-front { background-color: var(--accent-color); color: var(--text-color); transform: rotateY(180deg); font-family: 'Poppins', sans-serif; justify-content: space-around; } /* Default pre-rotation */
+.card-front p { font-size: 1.2em; line-height: 1.6; text-align: center; font-weight: 400; margin: 10px 0; overflow-y: auto; max-height: calc(100% - 80px); } /* Default max-height */
 .card-front p strong { font-weight: 700; color: var(--primary-color); display: block; margin-bottom: 10px; font-size: 1.15em; }
 .card-front p strong.highlight-word { color: var(--card-back-color); font-size: 1.6em; font-weight: 700; padding: 5px 0; display: block; margin-top: 5px; }
 .card-front .popup-button { background-color: var(--primary-color); color: white; }
@@ -122,31 +105,71 @@ footer { text-align: center; margin-top: 35px; padding-top: 20px; border-top: 1p
     button, .button-like { padding: 9px 14px; font-size: 0.9em; }
     #playersDisplay { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));}
 
-    /* === PERUBAHAN DI SINI === */
+    /* Kontainer PopUp Kartu untuk Mobile - Ukuran dasar */
     #cardPopup.modal-content {
-        /* Mengambil alih pengaturan lebar dari global untuk mobile */
-        width: calc(100% - 30px); /* (100% viewport - padding overlay kiri & kanan) dikurangi sedikit margin */
-        max-width: 280px; /* Sedikit lebih besar dari max-width kartu sebelumnya untuk memberi ruang */
-        /* Pastikan tidak ada padding horizontal yang mengganggu di sini jika width 100% */
-        padding: 0 !important; /* Hapus padding jika ada, agar card-container bisa 100% */
-        /* height: auto; Biarkan tinggi otomatis berdasarkan .card-container */
+        width: calc(100% - 30px); /* Lebar popup disesuaikan layar, dikurangi padding overlay */
+        max-width: 280px; /* Batas lebar maksimal popup */
+        padding: 0 !important; /* Hilangkan padding agar card-container bisa 100% */
+        /* height: auto; biarkan tinggi menyesuaikan .card-container */
     }
 
+    /* --- CSS DIAGNOSTIK SEMENTARA UNTUK KARTU DI MOBILE --- */
     .card-container {
-        width: 100%; /* Sekarang mengisi #cardPopup.modal-content yang lebarnya sudah diatur */
-        /* max-width: 260px; Tidak lagi diperlukan di sini jika parent sudah membatasi */
-        height: 380px; /* Tinggi tetap dipertahankan */
+        width: 100%; /* Mengisi lebar #cardPopup.modal-content */
+        height: 380px; /* Pertahankan tinggi yang sudah ditetapkan */
+        perspective: none !important; /* NONAKTIFKAN perspective untuk tes */
     }
-    /* === AKHIR PERUBAHAN === */
 
-    .card-front p { font-size: 1.1em; }
-    .card-front p strong.highlight-word { font-size: 1.4em; }
+    .card-flipper {
+        transform-style: flat !important; /* UBAH ke flat untuk tes */
+        transform: none !important;      /* HILANGKAN transform dasar untuk tes */
+        transition: none !important;     /* HILANGKAN transisi sementara untuk tes */
+    }
+    .card-flipper.is-flipped {
+        transform: none !important;      /* HILANGKAN transform saat flip untuk tes */
+    }
+
+    .card-face {
+        position: relative !important; /* UBAH dari absolute agar lebih mudah di-debug */
+        backface-visibility: visible !important; /* Tampilkan bagian belakang (jika relevan) untuk tes */
+    }
+
+    .card-back {
+         display: none !important; /* SEMBUNYIKAN bagian belakang kartu untuk tes ini */
+    }
+
+    .card-front {
+        display: flex !important; /* PASTIKAN bagian depan ditampilkan */
+        transform: none !important; /* HILANGKAN rotasi awal bagian depan untuk tes */
+        position: static !important; /* Jadikan static agar menempati ruang normal untuk tes */
+        width: 100%;
+        height: 100%;
+        /* background-color: lightblue !important; /* Opsi: Warna latar untuk memastikan .card-front terlihat */
+    }
+
+    /* Area teks di dalam kartu depan untuk tes */
+    #popupCardWord {
+        background-color: yellow !important; /* Latar kuning agar area teks jelas terlihat */
+        min-height: 100px !important;       /* Beri tinggi minimal yang cukup */
+        color: black !important;           /* Paksa warna teks menjadi hitam */
+        border: 2px solid red !important;  /* Beri border merah agar batasnya jelas */
+        overflow: visible !important;      /* Tampilkan konten yang mungkin terpotong untuk tes */
+        max-height: none !important;       /* Hilangkan batasan max-height untuk tes */
+        width: 90%;                        /* Pastikan lebarnya ada */
+        margin: 10px auto !important;      /* Pusatkan dan beri margin */
+        padding: 10px !important;          /* Beri padding internal */
+    }
+    /* --- AKHIR CSS DIAGNOSTIK SEMENTARA --- */
+
+    /* Style asli untuk mobile, beberapa mungkin tidak efektif karena override diagnostik */
+    /* .card-front p { font-size: 1.1em; } */ /* Ini di-override oleh #popupCardWord di atas */
+    .card-front p strong.highlight-word { font-size: 1.4em; } /* Ini mungkin masih berlaku jika tag strong ada di dalam #popupCardWord */
     #cardBackTitle { font-size: 1.4em; }
     .card-back-button { padding: 8px 15px; }
     .confirm-modal-content { padding: 20px; }
     .confirm-modal-content h3 { font-size: 1.3em; }
     #voteConfirmMessage { font-size: 1em; }
     .modal-buttons button { padding: 8px 20px;}
-    .custom-word-input-grid { grid-template-columns: 1fr; /* Tumpuk input di layar kecil */ }
+    .custom-word-input-grid { grid-template-columns: 1fr; }
 }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
