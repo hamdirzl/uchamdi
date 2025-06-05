@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamdi's Theater</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <audio id="bgMusic" loop><source src="assets/audio/background-music.mp3" type="audio/mpeg"></audio>
+    <audio id="clickSound"><source src="assets/audio/button-click.mp3" type="audio/mpeg"></audio>
+    <audio id="winSound"><source src="assets/audio/applause-win.mp3" type="audio/mpeg"></audio>
+    <audio id="loseSound"><source src="assets/audio/applause-lose.mp3" type="audio/mpeg"></audio>
+    <audio id="foolWinSound"><source src="assets/audio/applause-lose.mp3" type="audio/mpeg"></audio> <button id="menuButton" class="menu-button">☰</button>
+
+    <div id="menuPanel" class="menu-panel hidden">
+        <button id="closeMenuButton" class="close-menu-button">&times;</button>
+        <ul>
+            <li><button id="menuKamusKata">Kamus Kata Pribadi</button></li>
+            <li><button id="menuModeParty">Mode Party (The Fool)</button></li> <li><button id="menuPetunjuk">Petunjuk Permainan</button></li>
+        </ul>
+    </div>
+    <div id="menuOverlay" class="menu-overlay hidden"></div>
+
+
+    <div id="cardPopupOverlay" class="modal-overlay hidden">
+        <div id="cardPopup" class="modal-content">
+            <div class="card-container">
+                <div class="card-flipper" id="wordCardFlipper">
+                    <div class="card-face card-back">
+                        <img src="assets/images/card-back.png" alt="Balik Kartu" class="card-back-image" onerror="this.style.display='none'; this.parentElement.classList.add('no-image');">
+                        <span id="cardBackTitle">Hamdi's Theater</span>
+                        <button id="flipCardButton" class="popup-button card-back-button">Balik Kartu</button>
+                    </div>
+                    <div class="card-face card-front">
+                        <p id="popupCardWord"></p>
+                        <button id="closePopupButton" class="popup-button">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="voteConfirmModal" class="modal-overlay hidden">
+        <div class="modal-content confirm-modal-content">
+            <h3>Konfirmasi Vote</h3>
+            <p id="voteConfirmMessage"></p>
+            <div class="modal-buttons">
+                <button id="confirmVoteYesButton" class="action-button">Ya, Vote!</button>
+                <button id="confirmVoteNoButton" class="secondary-button">Batal</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="instructionsModal" class="modal-overlay hidden">
+        <div class="modal-content instructions-modal-content">
+            <button id="closeInstructionsButton" class="popup-button close-instructions-button">&times;</button>
+            <h2>Petunjuk Permainan</h2>
+            <div class="instructions-text">
+                <p><strong>Tujuan Permainan Umum:</strong></p>
+                <ul>
+                    <li><strong>Civilian:</strong> Temukan Undercover, Mr. White, dan jangan sampai salah vote!</li>
+                    <li><strong>Undercover:</strong> Berpura-pura menjadi Civilian. Arahkan vote ke Civilian lain. Jangan sampai ketahuan!</li>
+                    <li><strong>Mr. White:</strong> Berpura-pura tahu kata rahasia. Tebak kata Civilian jika kamu divote keluar untuk menang.</li>
+                    <li><strong>The Fool (jika ada):</strong> Buat dirimu terlihat paling mencurigakan agar dipilih saat voting! Jika berhasil divote keluar (bukan karena alasan lain), kamu menang.</li>
+                </ul>
+                <p><strong>Cara Bermain:</strong></p>
+                <ol>
+                    <li>Pengaturan: Tentukan jumlah pemain dan peran. Masukkan nama pemain.</li>
+                    <li>Pembagian Peran: Setiap pemain akan mendapatkan peran rahasia dan kata rahasia (kecuali Mr. White dan The Fool yang tidak mendapat kata).</li>
+                    <li>Deskripsi Kata: Secara bergiliran, setiap pemain memberikan satu kata deskripsi yang berhubungan dengan kata rahasianya (atau berimprovisasi jika kamu Mr. White/The Fool).</li>
+                    <li>Diskusi: Setelah semua memberi deskripsi, diskusikan siapa yang paling mencurigakan.</li>
+                    <li>Voting: Aktifkan mode vote dan pilih pemain yang akan dieliminasi.</li>
+                    <li>Eliminasi: Pemain dengan suara terbanyak akan keluar.
+                        <ul>
+                            <li>Jika Mr. White keluar, dia punya kesempatan menebak kata Civilian.</li>
+                            <li>Jika The Fool keluar karena divote, The Fool menang!</li>
+                            <li>Jika Undercover keluar karena divote, dia akan dapat Truth or Dare.</li>
+                            <li>Jika Civilian keluar karena divote, dia akan dapat Truth or Dare.</li>
+                        </ul>
+                    </li>
+                    <li>Permainan berlanjut hingga salah satu kondisi menang terpenuhi (misalnya, semua Undercover & Mr. White keluar, atau jumlah Civilian menipis, atau The Fool menang).</li>
+                </ol>
+                <p>Selamat bermain!</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <header>
+            <h1>Hamdi's Theater</h1>
+            <button id="toggleMusicButton" class="small-button">🔇</button>
+        </header>
+
+        <section id="gameSetup" class="active-section">
+            <h2>Pengaturan Permainan</h2>
+            <div class="setup-grid">
+                <div><label for="numPlayers">Jumlah Pemain (3-6):</label><input type="number" id="numPlayers" value="4" min="3" max="6"></div>
+                <div><label for="numCivilians">Jumlah Civilian:</label><input type="number" id="numCivilians" value="2" min="1"></div>
+                <div><label for="numUndercovers">Jumlah Undercover:</label><input type="number" id="numUndercovers" value="1" min="0"></div>
+                <div><label for="numMrWhite">Jumlah Mr. White:</label><input type="number" id="numMrWhite" value="1" min="0"></div>
+                <div><label for="numFools">Jumlah The Fool (0-1):</label><input type="number" id="numFools" value="0" min="0" max="1"></div> </div>
+            <div id="playerNamesContainer"></div>
+            <button id="startGameButton" class="primary-button">Mulai Permainan</button>
+            <p id="roleCountError" class="error-message"></p>
+        </section>
+
+        <section id="customWordSection" class="hidden"> <h2>Kamus Kata Pribadi (Berpasangan)</h2>
+            <div class="custom-word-input-grid">
+                <div class="input-pair">
+                    <label for="customWordCivilian">Kata untuk Civilian:</label>
+                    <input type="text" id="customWordCivilian" placeholder="Contoh: Gelas">
+                </div>
+                <div class="input-pair">
+                    <label for="customWordUndercover">Kata 'lawan' untuk Undercover:</label>
+                    <input type="text" id="customWordUndercover" placeholder="Contoh: Cangkir">
+                </div>
+            </div>
+            <button id="addPairedWordButton" class="secondary-button add-pair-button">Tambah Pasangan Kata</button>
+            <h3>Daftar Pasangan Kata:</h3>
+            <ul id="customWordList"></ul>
+        </section>
+
+        <section id="gameArea" class="hidden">
+            <div id="wordRevealInstruction" class="hidden">
+                <h2>Giliran Pemain: <span id="currentPlayerForWord"></span></h2>
+                <p>Klik tombol di bawah untuk melihat peran dan kata rahasiamu.</p>
+                <button id="revealRoleCardButton" class="primary-button">Lihat Kartu Peran</button>
+            </div>
+            <div id="playersDisplayArea"><h3>Pemain Dalam Game:</h3><div id="playersDisplay"></div></div>
+            <div id="votingSection" class="hidden">
+                <h3>Tahap Voting</h3>
+                <p id="votingInstruction">Setelah berdiskusi, silakan aktifkan mode vote dan pilih pemain yang akan dieliminasi.</p>
+                <button id="activateVotingButton" class="primary-button">Aktifkan Mode Vote</button>
+                <div id="mrWhiteGuessSection" class="hidden">
+                    <p>Mr. White, sekarang giliranmu menebak kata rahasia Civilian!</p>
+                    <input type="text" id="mrWhiteWordGuess" placeholder="Tebak kata...">
+                    <button id="submitMrWhiteGuess" class="action-button">Tebak Kata</button>
+                </div>
+                 <div id="foolVotedOutMessage" class="hidden"> <p id="foolWinnerMessage"></p>
+                </div>
+            </div>
+            <button id="checkMyWordAgainButton" class="secondary-button hidden">Lupa Kata Saya?</button>
+        </section>
+        <section id="truthOrDareSection" class="hidden">
+            <h2>Truth or Dare!</h2><p id="punishedPlayerName"></p>
+            <div class="tod-buttons"><button id="getTruthButton" class="truth-button">TRUTH</button><span class="tod-or">atau</span><button id="getDareButton" class="dare-button">DARE</button></div>
+            <p id="truthOrDareChallenge"></p><button id="punishmentDoneButton" class="primary-button">Selesai Hukuman</button>
+        </section>
+        <section id="gameOverSection" class="hidden">
+            <h2>Permainan Selesai!</h2><p id="gameWinner"></p>
+            <div id="scores"><h3>Skor Akhir:</h3><ul id="scoreList"></ul></div>
+        </section>
+        <footer>
+            <p class="developer-credit">Developed by: Hamdi Rizal</p>
+            <button id="restartGameButton" class="primary-button hidden">Restart Game</button>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
