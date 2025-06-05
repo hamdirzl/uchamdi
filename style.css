@@ -38,7 +38,7 @@ label { display: block; margin-bottom: 4px; font-weight: 500; font-size: 0.9em; 
 #playersDisplayArea { margin-top: 20px; margin-bottom: 20px; }
 #playersDisplay { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
 #playersDisplay .player-info { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; background-color: #fff; box-shadow: 0 2px 5px rgba(160, 132, 232, 0.07); transition: all 0.3s ease; position: relative; }
-#playersDisplay .player-info img { width: 60px; height: 60px; border-radius: 50%; border: 3px solid var(--secondary-color); object-fit: cover; } /* Pastikan path src benar di JS */
+#playersDisplay .player-info img { width: 60px; height: 60px; border-radius: 50%; border: 3px solid var(--secondary-color); object-fit: cover; }
 .player-info strong { font-size: 1em; font-weight: 600; display: block; }
 .player-info .player-status { font-size: 0.85em; font-style: italic; color: var(--subtle-text-color); }
 #playersDisplay .player-info.voted-out { opacity: 0.5; background-color: var(--accent-color); box-shadow: none; }
@@ -61,30 +61,28 @@ label { display: block; margin-bottom: 4px; font-weight: 500; font-size: 0.9em; 
 #scores li:last-child { border-bottom: none; }
 
 /* --- Custom Word Section (PERUBAHAN GAYA INPUT) --- */
-.custom-word-input-grid { /* BARU */
+.custom-word-input-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Dua kolom */
+    grid-template-columns: 1fr 1fr;
     gap: 15px;
     margin-bottom: 10px;
 }
-.input-pair { /* BARU */
+.input-pair {
     display: flex;
     flex-direction: column;
 }
 .input-pair label {
-    margin-bottom: 3px; /* Sedikit lebih dekat ke inputnya */
+    margin-bottom: 3px;
 }
 .input-pair input[type="text"] {
-    margin-top: 0; /* Reset margin atas */
-    margin-bottom: 5px; /* Jarak bawah kecil */
+    margin-top: 0;
+    margin-bottom: 5px;
 }
-.add-pair-button { /* BARU: Tombol tambah pasangan */
-    grid-column: 1 / -1; /* Rentangkan tombol di bawah kedua input jika grid */
-    /* Atau jika tidak di dalam grid, atur margin-top saja */
+.add-pair-button {
+    grid-column: 1 / -1;
     margin-top: 5px;
-    width: 100%; /* Buat tombol penuh jika diinginkan */
+    width: 100%;
 }
-/* Hapus gaya lama untuk .custom-word-input-group jika ada */
 #customWordList { list-style-type: none; padding: 0; max-height: 140px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 6px; padding: 10px; background-color: #fff; margin-top:15px;}
 #customWordList li { padding: 7px 10px; font-size: 0.95em; border-bottom: 1px dotted var(--border-color); display: flex; justify-content: space-between; align-items: center; }
 #customWordList li:last-child { border-bottom: none; }
@@ -123,11 +121,24 @@ footer { text-align: center; margin-top: 35px; padding-top: 20px; border-top: 1p
     h2 { font-size: 1.5em; }
     button, .button-like { padding: 9px 14px; font-size: 0.9em; }
     #playersDisplay { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));}
-    .card-container {
-        width: calc(100% - 30px);
-        max-width: 260px;
-        height: 380px; /* MODIFIED LINE */
+
+    /* === PERUBAHAN DI SINI === */
+    #cardPopup.modal-content {
+        /* Mengambil alih pengaturan lebar dari global untuk mobile */
+        width: calc(100% - 30px); /* (100% viewport - padding overlay kiri & kanan) dikurangi sedikit margin */
+        max-width: 280px; /* Sedikit lebih besar dari max-width kartu sebelumnya untuk memberi ruang */
+        /* Pastikan tidak ada padding horizontal yang mengganggu di sini jika width 100% */
+        padding: 0 !important; /* Hapus padding jika ada, agar card-container bisa 100% */
+        /* height: auto; Biarkan tinggi otomatis berdasarkan .card-container */
     }
+
+    .card-container {
+        width: 100%; /* Sekarang mengisi #cardPopup.modal-content yang lebarnya sudah diatur */
+        /* max-width: 260px; Tidak lagi diperlukan di sini jika parent sudah membatasi */
+        height: 380px; /* Tinggi tetap dipertahankan */
+    }
+    /* === AKHIR PERUBAHAN === */
+
     .card-front p { font-size: 1.1em; }
     .card-front p strong.highlight-word { font-size: 1.4em; }
     #cardBackTitle { font-size: 1.4em; }
