@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Undercover - Final Deluxe!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="title-header">
+            <div class="header-icon-group">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.5,17.5a3,3,0,1,1-3-3A3,3,0,0,1,17.5,17.5ZM17.5,13.5a1,1,0,1,0,1,1A1,1,0,0,0,17.5,13.5Z" fill="currentColor"/>
+                    <path d="M19,20H16a1,1,0,0,0-1,1v.5a.5.5,0,0,0,.5.5h4a.5.5,0,0,0,.5-.5V21A1,1,0,0,0,19,20Z" fill="currentColor"/>
+                    <path d="M6.5,17.5a3,3,0,1,1-3-3A3,3,0,0,1,6.5,17.5ZM6.5,13.5a1,1,0,1,0,1,1A1,1,0,0,0,6.5,13.5Z" fill="currentColor"/>
+                    <path d="M8,20H5a1,1,0,0,0-1,1v.5a.5.5,0,0,0,.5.5h4a.5.5,0,0,0,.5-.5V21A1,1,0,0,0,8,20Z" fill="currentColor"/>
+                    <path d="M12,12.5a4.5,4.5,0,1,1-4.5-4.5A4.5,4.5,0,0,1,12,12.5ZM12,5.5a2.5,2.5,0,1,0,2.5,2.5A2.5,2.5,0,0,0,12,5.5Z" fill="currentColor"/>
+                    <path d="M15,14H9a1,1,0,0,0-1,1v1.5a.5.5,0,0,0,.5.5h7a.5.5,0,0,0,.5-.5V15A1,1,0,0,0,15,14Z" fill="currentColor"/>
+                </svg>
+                <h1>UC HAMDI'S</h1>
+            </div>
+            <div class="header-controls">
+                <button id="auth-btn" title="Login/Daftar"><i class="fas fa-user-circle"></i></button>
+
+                <div class="hamburger-menu-container">
+                    <button id="hamburger-btn" title="Menu"><i class="fas fa-bars"></i></button>
+                    
+                    <div id="dropdown-menu" class="dropdown-content">
+                        <a href="#" id="show-guide-btn-menu" class="dropdown-item">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Cara Bermain</span>
+                        </a>
+                        <a href="#" id="toggle-music-btn-menu" class="dropdown-item">
+                            <i class="fas fa-music"></i>
+                            <span>Putar/Hentikan Musik</span>
+                        </a>
+                        <a href="#" id="open-music-settings-btn-menu" class="dropdown-item">
+                            <i class="fas fa-cog"></i>
+                            <span>Pengaturan Musik</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="initial-config-section">
+            
+            <div class="config-item">
+                <label for="total-players-config">Total Pemain</label>
+                <div class="input-stepper">
+                    <button class="stepper-btn" data-target="total-players-config" data-op="minus" aria-label="Kurangi"><i class="fas fa-minus"></i></button>
+                    <input type="number" id="total-players-config" min="3" max="15" value="5" readonly>
+                    <button class="stepper-btn" data-target="total-players-config" data-op="plus" aria-label="Tambah"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
+        
+            <hr class="config-divider">
+            <h3 class="config-subtitle">Komposisi Peran</h3>
+
+            <div class="config-item">
+                <label for="civilians-config" class="role-label-civilian"><i class="fas fa-shield-alt"></i> Civilian</label>
+                <div class="input-stepper">
+                    <button class="stepper-btn" data-target="civilians-config" data-op="minus" aria-label="Kurangi"><i class="fas fa-minus"></i></button>
+                    <input type="number" id="civilians-config" min="0" value="3" readonly>
+                    <button class="stepper-btn" data-target="civilians-config" data-op="plus" aria-label="Tambah"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
+
+            <div class="config-item">
+                <label for="undercovers-config" class="role-label-undercover"><i class="fas fa-user-secret"></i> Undercover</label>
+                <div class="input-stepper">
+                    <button class="stepper-btn" data-target="undercovers-config" data-op="minus" aria-label="Kurangi"><i class="fas fa-minus"></i></button>
+                    <input type="number" id="undercovers-config" min="0" value="1" readonly>
+                    <button class="stepper-btn" data-target="undercovers-config" data-op="plus" aria-label="Tambah"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
+
+            <div class="config-item">
+                <label for="mrwhites-config" class="role-label-mrwhite"><i class="fas fa-user-tie"></i> Mr. White</label>
+                <div class="input-stepper">
+                    <button class="stepper-btn" data-target="mrwhites-config" data-op="minus" aria-label="Kurangi"><i class="fas fa-minus"></i></button>
+                    <input type="number" id="mrwhites-config" min="0" value="1" readonly>
+                    <button class="stepper-btn" data-target="mrwhites-config" data-op="plus" aria-label="Tambah"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
+
+            <hr class="config-divider">
+            <h3 class="config-subtitle">Paket Kata</h3>
+            <div class="config-item-full">
+                <label for="word-pack-selection">Pilih Paket Kata: <span id="word-pack-owner" class="hidden">(Paket Online Anda)</span></label>
+                <select id="word-pack-selection"></select>
+                <button id="manage-word-packs-btn" class="btn-secondary btn-small"><i class="fas fa-edit"></i> Kelola Paket</button>
+            </div>
+            
+            <p id="config-error" class="error-message hidden"></p>
+            <button id="proceed-to-card-distribution-btn" class="btn-start-game">
+                <i class="fas fa-paper-plane"></i> Mulai Permainan
+            </button>
+        </div>
+        <div id="player-name-input-section" class="hidden">
+            <h2 id="player-name-input-title"><i class="fas fa-user-plus"></i> Masukkan Nama Pemain X</h2>
+            <label for="current-player-name-input">Nama Anda:</label>
+            <input type="text" id="current-player-name-input" placeholder="Nama Pemain">
+            <button id="submit-name-and-draw-card-btn" class="btn-primary"><i class="fas fa-save"></i> Simpan & Ambil Kartu</button>
+        </div>
+
+        <div id="card-reveal-modal" class="modal hidden">
+            <div class="modal-content card-modal-content">
+                <h3 id="card-reveal-popup-title">Ambil Kartu Anda, [Nama Pemain]!</h3>
+                <div class="card-scene">
+                    <div class="card" id="role-card">
+                        <div class="card-face card-back">
+                            <div class="card-back-design">?</div>
+                            <p><i class="fas fa-hand-pointer"></i> SENTUH KARTU UNTUK MEMBALIK</p>
+                        </div>
+                        <div class="card-face card-front">
+                            <div class="stamp">TOP SECRET</div>
+                            <h4 class="card-role-title">Peran Anda:</h4>
+                            <p id="card-player-role"></p>
+                            <h4 class="card-word-title">Kata Rahasia:</h4>
+                            <p id="card-player-word"></p>
+                            <div class="mission-box">
+                                <h4 class="card-mission-title">MISI ANDA:</h4>
+                                <p id="card-player-mission"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="hide-card-and-proceed-btn" class="hidden btn-primary"><i class="fas fa-eye-slash"></i> Sembunyikan & Lanjut</button>
+                <button id="close-peek-view-btn" class="hidden btn-secondary"><i class="fas fa-arrow-left"></i> Kembali</button>
+            </div>
+        </div>
+
+        <div id="game-section" class="hidden">
+            <h2><i class="fas fa-users"></i> Pemain Aktif</h2>
+            <div class="peek-card-container">
+                <button id="peek-card-btn" class="btn-secondary"><i class="fas fa-eye"></i> Intip Kartu Pribadi</button>
+            </div>
+            <ul id="active-player-list" class="player-avatar-grid"></ul>
+            <p id="debug-civilian-word" style="display:none;">Kata Civilian: <em id="civilian-word-display">(Debug)</em></p>
+            <div id="voting-phase">
+                <h3><i class="fas fa-vote-yea"></i> Konfirmasi Eliminasi</h3>
+                <p>Pemain yang dipilih: <strong id="player-to-eliminate-display">Belum ada</strong></p>
+                <button id="confirm-elimination-btn" disabled><i class="fas fa-gavel"></i> Eliminasi</button>
+            </div>
+        </div>
+        
+        <div id="how-to-play-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-popup-btn">&times;</span>
+                <h2><i class="fas fa-book-open"></i> Cara Bermain</h2>
+                <div class="guide-content">
+                    <h3>Tujuan Permainan</h3>
+                    <p>Ini adalah permainan deduksi sosial. Setiap pemain memiliki peran dan kata rahasia, kecuali Mr. White.</p>
+                    <ul>
+                        <li><strong class="role-civilian"><i class="fas fa-shield-alt"></i> Tim Civilian:</strong> Tujuanmu adalah menemukan dan mengeliminasi semua Undercover & Mr. White.</li>
+                        <li><strong class="role-undercover"><i class="fas fa-user-secret"></i> Tim Undercover:</strong> Tujuanmu adalah menyamar, berpura-pura menjadi Civilian, dan bertahan hingga akhir.</li>
+                        <li><strong class="role-mrwhite"><i class="fas fa-user-tie"></i> Mr. White:</strong> Kamu tidak tahu kata apapun. Tujuanmu adalah menyamar, mencari tahu kata rahasia Civilian, dan bertahan.</li>
+                    </ul>
+                    <h3>Alur Permainan</h3>
+                    <ol>
+                        <li><strong>Pengaturan:</strong> Tentukan jumlah pemain dan komposisi peran.</li>
+                        <li><strong>Pembagian Kartu:</strong> Setiap pemain memasukkan nama dan mengambil kartu rahasia.</li>
+                        <li><strong>Diskusi:</strong> Secara bergiliran, setiap pemain memberikan <strong>satu kata</strong> petunjuk.</li>
+                        <li><strong>Voting & Eliminasi:</strong> Diskusikan siapa yang paling mencurigakan, lalu lakukan voting untuk mengeliminasi satu pemain.</li>
+                        <li><strong>Hukuman:</strong> Pemain yang tereliminasi (dan tidak menang) akan mendapat hukuman Truth or Dare.</li>
+                    </ol>
+                    <h3>Kasus Khusus: Mr. White</h3>
+                    <p>Jika Mr. White dieliminasi, dia mendapat <strong>satu kesempatan</strong> untuk menebak kata rahasia Civilian. Jika benar, Mr. White langsung menang!</p>
+                    <h3>Kondisi Kemenangan</h3>
+                    <ul>
+                        <li><strong>Tim Civilian Menang</strong> jika semua Undercover dan Mr. White tereliminasi.</li>
+                        <li><strong>Tim Undercover & Mr. White Menang</strong> jika jumlah mereka sama atau lebih banyak dari jumlah Civilian.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="elimination-result-popup" class="modal hidden">
+            <div class="modal-content">
+                <h3 id="eliminated-player-info"></h3>
+                <div id="truth-or-dare-section">
+                    <p>Silakan pilih hukuman untuk yang tereliminasi:</p>
+                    <div class="truth-dare-buttons">
+                        <button id="truth-btn"><i class="fas fa-check-circle"></i> Truth</button>
+                        <button id="dare-btn"><i class="fas fa-fire"></i> Dare</button>
+                    </div>
+                    <div id="penalty-display" class="hidden">
+                        <p id="penalty-text"></p>
+                    </div>
+                </div>
+                <button id="close-elimination-popup-btn" class="hidden btn-secondary"><i class="fas fa-arrow-right"></i> Lanjut</button>
+            </div>
+        </div>
+        
+        <div id="mass-penalty-modal" class="modal hidden">
+            <div class="modal-content elimination-popup-content">
+                <h3><i class="fas fa-gavel"></i> Babak Hukuman!</h3>
+                <p>Mr. White menang! Pemain berikut harus menerima hukuman:</p>
+                <p>Giliran: <strong id="mass-penalty-player-name"></strong></p>
+                <div id="mass-truth-or-dare-section">
+                    <p>Silakan pilih hukuman:</p>
+                    <button id="mass-truth-btn"><i class="fas fa-check-circle"></i> Truth</button>
+                    <button id="mass-dare-btn"><i class="fas fa-fire"></i> Dare</button>
+                    <div id="mass-penalty-display" class="hidden">
+                        <p id="mass-penalty-text"></p>
+                    </div>
+                </div>
+                <button id="mass-penalty-next-btn" class="hidden btn-primary">Lanjut</button>
+            </div>
+        </div>
+
+        <div id="mr-white-guess-section" class="modal hidden">
+            <div class="modal-content">
+                <h3><i class="fas fa-user-secret"></i> Mr. White Teridentifikasi!</h3>
+                <p><strong id="mr-white-name-guess"></strong>, Anda punya satu kesempatan untuk menebak kata rahasia Civilian:</p>
+                <input type="text" id="mr-white-word-guess-input" placeholder="Ketik tebakan kata...">
+                <button id="submit-mr-white-guess-btn" class="btn-primary">Kirim Tebakan</button>
+            </div>
+        </div>
+
+        <div id="winner-popup-modal" class="modal hidden">
+            <div class="modal-content">
+                <img id="confetti-animation" src="assets/images/confetti.gif" alt="Confetti" class="confetti-overlay hidden"/>
+                <span class="close-popup-btn">&times;</span>
+                <div class="winner-content-wrapper">
+                    <h2 id="popup-winner-message">🎉 Selamat! 🎉</h2>
+                    <p id="popup-winner-detail"></p>
+                    <button id="proceed-to-round-scores-btn" class="btn-secondary">Lanjut ke Detail Babak</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="round-over-section" class="hidden">
+            <h2><i class="fas fa-flag-checkered"></i> Babak Selesai!</h2>
+            <div id="round-summary">
+                <div id="round-roles-section">
+                    <h3><i class="fas fa-scroll"></i> Detail Peran & Skor</h3>
+                    <ul id="round-roles-list"></ul>
+                </div>
+            </div>
+            <div id="next-actions-section">
+                <button id="play-new-round-btn" class="btn-primary">Main Babak Baru</button>
+                <button id="finish-game-show-final-scores-btn" class="btn-secondary">Selesai & Lihat Skor</button>
+                <button id="restart-game-full-btn" class="btn-danger-text">Ulang Dari Awal</button>
+            </div>
+        </div>
+
+        <div id="final-score-display-section" class="modal hidden">
+             <div class="modal-content">
+                <span class="close-final-score-btn">&times;</span>
+                <h2><i class="fas fa-star"></i> Skor Akhir</h2>
+                <div class="table-responsive-wrapper">
+                    <table id="final-score-table">
+                        <thead>
+                            <tr>
+                                <th>Peringkat</th>
+                                <th>Pemain</th>
+                                <th>Peran</th>
+                                <th>Skor</th>
+                            </tr>
+                        </thead>
+                        <tbody id="final-cumulative-scores-list"></tbody>
+                    </table>
+                </div>
+                <div class="final-buttons-wrapper">
+                    <button id="share-results-btn" class="btn-primary"><i class="fas fa-share-alt"></i> Bagikan Hasil</button>
+                    <button id="restart-from-final-btn" class="btn-secondary">Ulang Dari Awal</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="music-settings-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-popup-btn">&times;</span>
+                <h2><i class="fas fa-volume-up"></i> Pengaturan Musik</h2>
+                <div class="config-item-modal">
+                    <label for="music-selection">Pilih Musik:</label>
+                    <select id="music-selection">
+                        <option value="-1">Acak (Ganti Otomatis)</option>
+                        <option value="0" selected>Detektif Malam</option>
+                        <option value="1">Misi Rahasia</option>
+                        <option value="2">Pesta Topeng</option>
+                    </select>
+                </div>
+                <button id="confirm-music-btn" class="btn-primary">Terapkan</button>
+            </div>
+        </div>
+
+        <div id="peek-player-select-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-popup-btn">&times;</span>
+                <h2><i class="fas fa-user-check"></i> Pilih Nama Anda</h2>
+                <p>Pilih nama Anda untuk melihat kartu kembali.</p>
+                <div class="config-item-modal">
+                    <label for="peek-player-select">Pemain:</label>
+                    <select id="peek-player-select"></select>
+                </div>
+                <button id="confirm-peek-btn" class="btn-primary">Tampilkan Kartu</button>
+            </div>
+        </div>
+        
+        <div id="word-pack-manager-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-popup-btn">&times;</span>
+                <h2><i class="fas fa-book"></i> Pengelola Paket Kata</h2>
+                
+                <div class="modal-scrollable-content">
+                    <div class="pack-manager-section">
+                        <h4>Buat Paket Baru</h4>
+                        <div class="input-group">
+                            <input type="text" id="new-pack-name-input" placeholder="Nama Paket Baru (cth: Edisi Kantor)">
+                            <button id="create-new-pack-btn" class="btn-primary"><i class="fas fa-plus"></i> Buat</button>
+                        </div>
+                    </div>
+
+                    <hr class="config-divider">
+
+                    <div class="pack-manager-section">
+                        <h4>Edit Paket yang Ada</h4>
+                        <div class="input-group">
+                             <label for="edit-pack-selection">Pilih Paket:</label>
+                             <select id="edit-pack-selection"></select>
+                        </div>
+                        <div class="word-pair-input">
+                            <input type="text" id="new-civilian-word-input" placeholder="Kata Civilian">
+                            <input type="text" id="new-undercover-word-input" placeholder="Kata Undercover">
+                        </div>
+                        <button id="add-word-pair-btn" class="btn-primary" disabled><i class="fas fa-plus-circle"></i> Tambah Pasangan Kata</button>
+                        <button id="delete-pack-btn" class="btn-danger-text" disabled><i class="fas fa-trash"></i> Hapus Paket Terpilih</button>
+                    </div>
+
+                    <hr class="config-divider">
+
+                    <div class="pack-manager-section">
+                        <h4>Daftar Kata di Paket "<span id="current-pack-display-name">...</span>"</h4>
+                        <ul id="word-list-display">
+                            <li>Pilih sebuah paket untuk melihat isinya.</li>
+                        </ul>
+                    </div>
+                </div>
+                <button id="close-word-pack-manager-done-btn" class="btn-primary"><i class="fas fa-check"></i> Selesai</button>
+
+            </div>
+        </div>
+
+        <div id="auth-modal" class="modal hidden">
+            <div class="modal-content">
+                <span id="close-auth-modal-btn" class="close-popup-btn">&times;</span>
+                
+                <div id="login-view">
+                    <h2 class="auth-title"><i class="fas fa-sign-in-alt"></i> Login</h2>
+                    <p id="login-error" class="error-message hidden"></p>
+                    <input type="email" id="login-email" placeholder="Email Anda" autocomplete="email">
+                    <input type="password" id="login-password" placeholder="Password Anda" autocomplete="current-password">
+                    <button id="login-btn" class="btn-primary">Login</button>
+                    <p class="auth-switch">Belum punya akun? <a href="#" id="show-register-view-link">Daftar di sini</a></p>
+                </div>
+                
+                <div id="register-view" class="hidden">
+                    <h2 class="auth-title"><i class="fas fa-user-plus"></i> Daftar Akun Baru</h2>
+                    <p id="register-error" class="error-message hidden"></p>
+                    <input type="email" id="register-email" placeholder="Email Anda" autocomplete="email">
+                    <input type="password" id="register-password" placeholder="Password (min. 6 karakter)" autocomplete="new-password">
+                    <button id="register-btn" class="btn-primary">Daftar</button>
+                    <p class="auth-switch">Sudah punya akun? <a href="#" id="show-login-view-link">Login di sini</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="developer-info">
+            <p>Developed by Hamdi Rizal</p>
+            <p>
+                <a href="https://wa.me/6282286149127" target="_blank">WA: 0822-8614-9127</a> |
+                <a href="https://instagram.com/hamdirzl" target="_blank">IG: @hamdirzl</a>
+            </p>
+            <p>Support Team: <a href="https://instagram.com/mhaafizz" target="_blank">IG: @mhaafizz</a></p>
+        </div>
+    </div>
+
+    <audio id="background-music"></audio>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+      // ===================================================================
+      // ===== KONFIGURASI SUPABASE ANDA (VERSI FINAL & BENAR) =====
+      // ===================================================================
+      const supabaseUrl = 'https://wqtqklxzkxbhatsgojfq.supabase.co';
+      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndxdHFrbHh6a3hiaGF0c2dvamZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkyNDI5OTIsImV4cCI6MjA2NDgxODk5Mn0.u-mZ_Y67Sy1XDUpR3GirjSoyhK7_qI4XnniqzxAYeio';
+      
+      // Inisialisasi Supabase Client
+      const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+    </script>
+    
+    <script src="script.js"></script>
+</body>
+</html>
